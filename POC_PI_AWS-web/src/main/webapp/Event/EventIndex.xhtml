@@ -1,0 +1,80 @@
+<ui:composition 
+xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Template/Template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:param name="page_name" value="Edit" />	
+	
+	<ui:define name="body">
+	
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Breadcrumb Form Section Begin -->
+
+    <!-- Register Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+                    <div class="blog-sidebar">
+                        
+                      
+                        <div class="recent-post">
+                            <h4>Participants</h4>
+                            <div class="recent-blog">
+                            <ui:repeat var="o" value="#{eventBean.getListParticipants()}">
+                            
+                                <a href="#" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="#{o.getImage()}" alt=""/>
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>#{o.getUsername()}</h6>
+                                        <p>#{o.getFirstName()} <span>#{o.getLastName()}</span></p>
+                                    </div>
+                                </a>
+                               
+                              
+                              </ui:repeat>
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>
+<div class="col-lg-9 order-1 order-lg-2">
+                    
+                    <div class="blog-details-inner">
+    <div class="blog-detail-title">
+        <h2>#{eventBean.name}</h2>
+        <p>#{eventBean.category} <span>* #{eventBean.startDate} -#{eventBean.endDate}</span></p>
+    </div>
+    <div class="blog-large-pic">
+        <img src="#{eventBean.picture}" alt=""/>
+    </div>
+    <div class="float-right">
+    <h4>Rating - #{eventBean.currentRating}</h4></div>
+    <div class="blog-quote">
+        <p>#{eventBean.description}</p>
+    </div>
+	</div>
+	<ui:fragment rendered="#{Administrator}">
+	<h:form>
+	<h:commandButton styleClass="site-btn register-btn" action="#{eventBean.loadDataToInputs()}" value="UPDATE"></h:commandButton>
+	</h:form>
+	</ui:fragment>
+                    </div>
+                </div>
+            
+            </div>
+        
+            </section>
+    <!-- Register Form Section End -->
+    
+		</ui:define>	
+</ui:composition>
+

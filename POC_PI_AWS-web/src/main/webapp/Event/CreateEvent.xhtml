@@ -1,0 +1,76 @@
+	<ui:composition 
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:jsf="http://xmlns.jcp.org/jsf"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+		template="/Template/Template.xhtml"
+		xmlns:p="http://primefaces.org/ui">
+	
+	<ui:param name="page_name" value="Create" />	
+	
+	<ui:define name="body">
+	#{eventBean.goToCreateEvent()}
+    <!-- Breadcrumb Section Begin -->
+   
+    <!-- Breadcrumb Form Section Begin -->
+
+    <!-- Register Section Begin -->
+    <div class="register-login-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="register-form">
+                        <h2> 
+                        	CREATE EVENT
+                        </h2>
+                        <h:form enctype="multipart/form-data">
+                            <div class="group-input">
+                                <label for="username"> Name</label>
+                                <h:inputText  value = "#{eventBean.name}" ></h:inputText>
+                                
+                            </div>
+                            <div class="group-input">
+                                <label for="pass"> Description</label>
+                                <h:inputText   value = "#{eventBean.description}" ></h:inputText>
+                            </div>
+                            <div class="group-input">
+                                <label for="con-pass">Start Date</label>
+                                <h:inputText   value = "#{eventBean.startDate}" ></h:inputText>
+                            </div>
+                            <div class="group-input">
+                                <label for="con-pass">End Date</label>
+                                <h:inputText   value = "#{eventBean.endDate}" ></h:inputText>
+                            </div>
+                            <div class="group-input">
+                                <label for="con-pass">Category</label>
+                                <h:inputText  value = "#{eventBean.category}" ></h:inputText>
+                            </div>
+                          
+                            <div class="group-input">
+                                <label for="con-pass">Image</label>
+                                <p:fileUpload value="#{eventBean.file}" mode="simple" skinSimple="true"/>
+                               
+                            </div>
+                           
+        			 <h:commandButton type="submit"  action="#{eventBean.addEvent()}" value = "CreateEvent"  styleClass="site-btn register-btn">
+            					
+         					</h:commandButton>
+                                     
+                        </h:form>
+                        <div class="switch-login">
+                            <a href="./login.html" class="or-login">Or Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <!-- Register Form Section End -->
+    
+	
+</ui:define>
+</ui:composition>
+

@@ -1,0 +1,196 @@
+	<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="/Template/Template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:param name="page_name" value="Edit" />	
+	
+	<ui:define name="body">
+	  <script src="../Ressources/js/jquery-3.3.1.min.js">
+       
+       
+   </script>
+   <script src="../resources/main.js"></script>
+   <h:outputScript name="main.js"></h:outputScript>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Blog Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+                    <div class="blog-sidebar">
+                        <div class="search-form">
+                            <h4>Search</h4>
+                            <form action="#">
+                                <input type="text" placeholder="Search . . .  " />
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <div class="blog-catagory">
+                            <h4>Categories</h4>
+                            <ul>
+                                <li><a href="#">Fashion</a></li>
+                                <li><a href="#">Travel</a></li>
+                                <li><a href="#">Picnic</a></li>
+                                <li><a href="#">Model</a></li>
+                            </ul>
+                        </div>
+                        <div class="recent-post">
+                            <h4>Recent Post</h4>
+                            <div class="recent-blog">
+                                <a href="#" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="/Ressources/img/blog/recent-1.jpg" alt="" />
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6 id="parfaiit">The Personality Trait That Makes...</h6>
+                                        <p>Fashion <span>- May 19, 2019</span></p>
+                                    </div>
+                                </a>
+                                <a href="#" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="/Ressources/img/blog/recent-2.jpg" alt="" />
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>The Personality Trait That Makes...</h6>
+                                        <p>Fashion <span>- May 19, 2019</span></p>
+                                    </div>
+                                </a>
+                                <a href="#" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="/Ressources/img/blog/recent-3.jpg" alt="" />
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>The Personality Trait That Makes...</h6>
+                                        <p>Fashion <span>- May 19, 2019</span></p>
+                                    </div>
+                                </a>
+                                <a href="#" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="/Ressources/img/blog/recent-4.jpg" alt="" />
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>The Personality Trait That Makes...</h6>
+                                        <p>Fashion <span>- May 19, 2019</span></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="blog-tags">
+                            <h4>Product Tags</h4>
+                            <div class="tag-item">
+                                <a href="#">Towel</a>
+                                <a href="#">Shoes</a>
+                                <a href="#">Coat</a>
+                                <a href="#">Dresses</a>
+                                <a href="#">Trousers</a>
+                                <a href="#">Men's hats</a>
+                                <a href="#">Backpack</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="row">
+                    <ui:repeat var="o" value="#{eventBean.getAll()}">
+                        <div class="col-lg-6 col-sm-6 ">
+                            <div class="blog-item">
+                                <div class="bi-pic">
+                                    <img src="#{o.imageEvent}" style="height:350px;" alt="" />
+                                </div>
+                                <div class="bi-text ">
+                                    
+                                       <div style="display:flex;">
+                                       <h:form><h:commandButton value="#{o.name}" styleClass="btn btn-light" action="#{eventBean.getEvent(o.eventId)}"></h:commandButton></h:form>  <div style="margin-left:auto; "> 
+                                     <ui:fragment rendered="#{Administrator}">
+                                      <h:form> 
+                                      <h:commandButton styleClass="btn btn-light " value="DELETE" action="#{eventBean.deleteEvent(o.eventId)}" >
+                                      </h:commandButton></h:form>
+                                      </ui:fragment>
+                                       </div></div>
+                                        <h6 >Rating - #{o.rating}</h6>
+                                  
+                                    <!-- Modal -->
+	
+                                    <h:form>
+                                   <div  style="float:right;">
+                                    <ui:fragment rendered="#{o.canParticipate}">
+                                    	<h:commandButton styleClass="btn btn-register" value="Participerr"  action="#{eventBean.participer(o.eventId)}"> <i class="fa fa-plus"></i></h:commandButton>
+                                    	
+                                    
+                                    </ui:fragment>
+                                        <ui:fragment rendered="#{o.canRate}">
+                                        	
+					<button type="button" class="site-btn login-btn" data-toggle="modal" onclick="addRate(#{o.eventId})" data-target="#oneModel">
+ 						Rate <i class="fa fa-plus"></i>
+					</button>
+                                    	</ui:fragment>	
+                                    	</div>
+                                    	</h:form>
+                                    
+                                    <p >#{o.category}- <span>Category</span><span style="float: right; margin-right:5px;"><i class="fa fa-user"></i>#{o.numOfParticipants}</span></p>
+                                
+                                </div>
+                            </div>
+                        </div>
+                        </ui:repeat>
+                      
+                        
+                       
+                        
+                        <div class="col-lg-12">
+                            <div class="loading-more">
+                                <i class="icon_loading"></i>
+                                <a href="#">
+                                    Loading More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+       <div class="modal fade" id="oneModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  		<div class="modal-dialog" role="document">
+    		<div class="modal-content">
+    		<h:form styleclass="input-group" id="form" >
+      			<div class="modal-header">
+       			 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+       			 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+       			   <span aria-hidden="true"></span>
+      			  </button>
+    			  </div>
+     				 <div class="modal-body">
+   					    <h:inputText styleClass="form-control" value="#{eventBean.ratingAdded}" id="ratingAdded"/>
+   					        <h:inputHidden id="event_Id" value="#{eventBean.eventId}" />
+
+     				 </div>
+     				 <div class="modal-footer">
+      				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       				   <h:commandButton type="submit" id="cleaningButton" styleclass="btn btn-primary" value="Rate"   action="#{eventBean.addRating()}"> <i class="fa fa-plus"></i></h:commandButton>
+
+     				 </div>
+     				 </h:form>
+  				  </div>
+ 				 </div>
+				</div>
+    <!-- Blog Section End -->
+       <h:outputScript name="main.js"></h:outputScript>
+    <h:outputScript>
+    
+    document.getElementById("form:cleaningButton").onclick=function(event){
+	  if(cleanInput()){
+	  event.preventDefault();
+	  }
+    }
+  
+    </h:outputScript>
+    		</ui:define>	
+</ui:composition>
