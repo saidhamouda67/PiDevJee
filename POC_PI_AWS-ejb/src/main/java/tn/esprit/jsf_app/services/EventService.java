@@ -6,6 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -22,6 +24,8 @@ import javax.ws.rs.core.Response;
 import tn.esprit.jsf_app.DTO.Event;
 import tn.esprit.jsf_app.interfaces.EventServiceRemote;
 
+@Stateless
+@LocalBean
 public class EventService implements EventServiceRemote{
 
 	public String GlobalEndPoint = "https://consomitounsisaid.azurewebsites.net";
